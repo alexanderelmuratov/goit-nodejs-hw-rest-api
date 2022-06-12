@@ -4,10 +4,17 @@ const { Contact } = require("../../models");
 
 const removeContact = async (req, res) => {
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndRemove(contactId);
+  const { _id } = req.user;
+
+  const result = await Contact.findOneAndRemove({
+    _id: contactId,
+    owner: _id,
+  }).populate("owner", "_id email subscription");
+
   if (!result) {
     throw createError(404, `Contact with id=${contactId} not found`);
   }
+
   res.json({
     status: "success",
     code: 200,
