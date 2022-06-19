@@ -19,6 +19,10 @@ const contactSchema = Schema(
       type: Boolean,
       default: false,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -30,25 +34,25 @@ const joiSchema = Joi.object({
       "letters"
     )
     .required()
-    .messages({ "any.required": "missing field name" }),
+    .messages({ "any.required": "Missing field name" }),
   email: Joi.string()
     .email({ minDomainSegments: 2 })
     .required()
-    .messages({ "any.required": "missing field email" }),
+    .messages({ "any.required": "Missing field email" }),
   phone: Joi.string()
     .pattern(
       /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
       "numbers"
     )
     .required()
-    .messages({ "any.required": "missing field phone" }),
+    .messages({ "any.required": "Missing field phone" }),
   favorite: Joi.boolean(),
 });
 
 const statusJoiSchema = Joi.object({
   favorite: Joi.boolean()
     .required()
-    .messages({ "any.required": "missing field favorite" }),
+    .messages({ "any.required": "Missing field favorite" }),
 });
 
 const Contact = model("contact", contactSchema);
