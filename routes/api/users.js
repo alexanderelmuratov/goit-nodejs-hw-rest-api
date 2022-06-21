@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get("/current", auth, ctrlWrapper(ctrl.getCurrent));
 
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verifyEmail));
+
 router.patch(
   "/",
   auth,
