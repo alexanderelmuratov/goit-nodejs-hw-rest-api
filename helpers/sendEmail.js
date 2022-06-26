@@ -11,7 +11,7 @@ const sendEmail = async (email, verificationToken) => {
     to: email,
     from: "elmuratov@gmail.com",
     subject: "Confirmation email",
-    html: `<a target="_blank" href=${href}>Click here to confirm your email!</a>`,
+    html: `<a target="_blank" href=${href}>Click here to confirm your email</a>`,
   };
 
   try {
